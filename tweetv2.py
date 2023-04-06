@@ -28,8 +28,6 @@ for tweet in tweets:
   #以下に処理を記述
   if 'シェル' in tweet.full_text:
    current_time = subprocess.run(['bash' , 'commandstart.sh' , tweet.full_text], stdout=subprocess.PIPE, text=True)
-   print(current_time.stdout.strip())
-   Client.create_tweet(text=current_time.stdout.strip(),in_reply_to_tweet_id=tweet_id)
    api.update_status('@%s %s' % (tweet.user.screen_name, current_time) , in_reply_to_status_id = tweet.id)
   else:
    print("このリプライは返信対象ではないためスキップします")
